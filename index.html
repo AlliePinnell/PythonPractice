@@ -127,6 +127,7 @@
       50% { transform: scale(1.4); color: var(--accent); }
       100% { transform: scale(1); color: var(--text); }
     }
+    
   </style>
 </head>
 <body>
@@ -332,12 +333,12 @@
           score++;
         } else {
           const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
-          feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+          feedback.textContent = `Incorrect. `;
           feedback.className = "answer-feedback incorrect";
         }
       } else {
         const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
-        feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
+        feedback.textContent = `No answer selected. `;
         feedback.className = "answer-feedback incorrect";
         counted++;
       }

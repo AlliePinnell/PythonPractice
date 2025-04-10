@@ -213,7 +213,7 @@
   ["Which of the following is a valid variable name?", ["1stName", "first name", "first_name", "first-name"], "c"],
   ["Which operator is used for exponentiation?", ["^", "**", "//", "%%"], "b"],
   ["What is the default value of the 'end' parameter in print()?", ["None", "' '", "'\\n'", "'\\t'"], "c"],
-  ["Which of the following is a comment in Python?", ["// comment", "# comment", "<!-- comment -->", "/* comment */"], "b"],
+  ["Which of the following is a comment in Python?", ["// comment", "# comment", "\\\comment", "/* comment */"], "b"],
   ["What does the function input() return by default?", ["int", "float", "str", "bool"], "c"],
   ["What error occurs when adding a string and an integer?", ["NameError", "SyntaxError", "ValueError", "TypeError"], "d"],
   ["What does len('Python') return?", ["5", "6", "7", "Error"], "b"],
@@ -223,7 +223,6 @@
   ["Which operator returns the remainder of division?", ["//", "/", "%", "**"], "c"],
   ["Which of the following are comparison operators?", ["and, or", "==, !=, <", "+, -", "in, not in"], "b"],
   ["Which logical operator returns True if both operands are True?", ["or", "and", "not", "xor"], "b"],
-  ["What does ~a return if a = 10?", ["-10", "-11", "9", "11"], "b"],
   ["What does the 'is' operator check?", ["Equality", "Identity", "Membership", "Length"], "b"],
   ["Which of the following checks if a key exists in a dictionary?", ["key.exists()", "key in dict", "dict.has_key(key)", "dict.contains(key)"], "b"],
   ["Which data type is immutable?", ["List", "Set", "Dictionary", "Tuple"], "d"],
@@ -340,12 +339,12 @@
           score++;
         } else {
           const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
-          feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+          feedback.textContent = `Incorrect. `;
           feedback.className = "answer-feedback incorrect";
         }
       } else {
         const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
-        feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
+        feedback.textContent = `No answer selected. `;
         feedback.className = "answer-feedback incorrect";
         counted++;
       }
