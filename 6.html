@@ -232,7 +232,7 @@
   ["Which string method converts all characters to lowercase?", ["toLower()", "lower()", "tolowercase()", "casefold()"], "b"],
   ["Which method splits a string into a list?", ["break()", "split()", "divide()", "chop()"], "b"],
   ["Which method joins list elements into a string?", ["merge()", "attach()", "join()", "combine()"], "c"],
-  ["What is the result of 'hello'.count('l')?", ["1", "2", "3", "4"], "c"],
+  ["What is the result of 'hello'.count('l')?", ["1", "2", "3", "4"], "b"],
   ["What does strip() do?", ["Removes all characters", "Removes whitespace from both ends", "Converts string to list", "Makes text uppercase"], "b"],
   ["What list method adds a value to the end?", ["append()", "insert()", "add()", "push()"], "a"],
   ["Which method removes a specific value from a list?", ["discard()", "remove()", "pop()", "delete()"], "b"],
@@ -314,44 +314,76 @@
     attachBurstListeners();
   };
 
-  function checkAnswers() {
-    let score = 0, counted = 0;
-    questions.forEach((q, i) => {
-      const qNum = i + 1;
-      const correct = q[2];
-      const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
-      const feedback = document.getElementById(`feedback${qNum}`);
-      feedback.style.display = 'block';
+  function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-      const options = document.querySelectorAll(`input[name="q${qNum}"]`);
-      const optionLabels = [...options].map(input => input.parentElement.textContent.trim());
+async function checkAnswers() {
+  let score = 0, counted = 0;
+  let interrupted = false;
 
-      if (userAnswer) {
-        if (userAnswer.value === "null") {
-          feedback.textContent = "Question was skipped and not counted.";
-          feedback.className = "answer-feedback";
-          return;
-        }
-        counted++;
-        if (userAnswer.value === correct) {
-          feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:88px;height:88px;vertical-align:middle;margin-right:6px;">Correct!';
-          feedback.className = "answer-feedback correct";
-          score++;
-        } else {
-          const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
-          feedback.textContent = `Incorrect. `;
-          feedback.className = "answer-feedback incorrect";
-        }
+  // Add listeners to interrupt animation
+  function interrupt() {
+    interrupted = true;
+    window.removeEventListener('keydown', interrupt);
+    window.removeEventListener('mousedown', interrupt);
+  }
+
+  window.addEventListener('keydown', interrupt);
+  window.addEventListener('mousedown', interrupt);
+
+  for (let i = 0; i < questions.length; i++) {
+    const qNum = i + 1;
+    const correct = questions[i][2];
+    const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
+    const feedback = document.getElementById(`feedback${qNum}`);
+    const questionDiv = feedback.closest('.question');
+    const options = document.querySelectorAll(`input[name="q${qNum}"]`);
+    const optionLabels = [...options].map(input => input.parentElement.textContent.trim());
+
+    if (!interrupted) {
+      questionDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      await sleep(100);
+    }
+
+    feedback.style.display = 'block';
+
+    if (userAnswer) {
+      if (userAnswer.value === "null") {
+        feedback.textContent = "Question was skipped and not counted.";
+        feedback.className = "answer-feedback";
+        continue;
+      }
+      counted++;
+      if (userAnswer.value === correct) {
+        feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:88px;height:88px;vertical-align:middle;margin-right:6px;">Correct!';
+        feedback.className = "answer-feedback correct";
+        score++;
       } else {
         const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
-        feedback.textContent = `No answer selected. `;
+        feedback.textContent = `Incorrect.`;
         feedback.className = "answer-feedback incorrect";
-        counted++;
       }
-    });
+    } else {
+      const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
+      feedback.textContent = `No answer selected.`;
+      feedback.className = "answer-feedback incorrect";
+      counted++;
+    }
 
-    document.getElementById('result').textContent = `You got ${score} out of ${counted} counted questions correct.`;
+    if (!interrupted) {
+      await sleep(400);
+    }
   }
+
+  // Clean up listeners
+  window.removeEventListener('keydown', interrupt);
+  window.removeEventListener('mousedown', interrupt);
+
+  document.getElementById('result').textContent = `You got ${score} out of ${counted} counted questions correct.`;
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 </script>
 
 </body>
