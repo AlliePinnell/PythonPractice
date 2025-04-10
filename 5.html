@@ -1,23 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>COMP1112 Full Review Quiz</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #1f0118; color:white; font-weight: bold;}
-    .question { margin-bottom: 25px; padding: 15px; background: #270727; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color:white;}
-    .question h3 { margin-bottom: 10px; color:white;}
-    .correct { color: green; font-weight: bold; }
-    .incorrect { color: red; font-weight: bold; }
-    .answer-feedback { margin-top: 5px; display: none; }
-    .result { font-size: 1.2em; font-weight: bold; margin-top: 20px; }
-    button { padding: 10px 20px; background: #4d003e; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #ff3cbb; }
+    :root {
+      --primary: #ff3cbb;
+      --background: #1f0118;
+      --card: #270727;
+      --accent: #ffb6f9;
+      --text: white;
+      --correct: #00ff66;
+      --incorrect: #ff4c4c;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: var(--background);
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    h1 {
+      color: var(--accent);
+      text-align: center;
+    }
+
+    .question {
+      margin-bottom: 25px;
+      padding: 15px;
+      background: var(--card);
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      opacity: 0;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .question:nth-child(1) { animation-delay: 0.1s; }
+    .question:nth-child(2) { animation-delay: 0.2s; }
+    .question:nth-child(3) { animation-delay: 0.3s; }
+    .question:nth-child(4) { animation-delay: 0.4s; }
+    .question:nth-child(5) { animation-delay: 0.5s; }
+    .question:nth-child(6) { animation-delay: 0.6s; }
+    .question:nth-child(7) { animation-delay: 0.7s; }
+    .question:nth-child(8) { animation-delay: 0.8s; }
+    .question:nth-child(9) { animation-delay: 0.9s; }
+
+    .correct {
+      color: var(--correct);
+      font-weight: bold;
+      animation: pulse 0.4s ease-in-out;
+    }
+
+    .incorrect {
+      color: var(--incorrect);
+      font-weight: bold;
+      animation: pulse 0.4s ease-in-out;
+    }
+
+    .answer-feedback {
+      margin-top: 5px;
+      display: none;
+    }
+
+    .result {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 20px;
+      animation: glow 0.6s ease-in-out;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: var(--card);
+      color: var(--text);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      animation: popIn 0.5s ease;
+    }
+
+    button:hover {
+      background: var(--primary);
+      transform: scale(1.05);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    label.burst {
+      display: inline-block;
+      animation: burst 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #fff, 0 0 10px var(--primary); }
+      100% { text-shadow: 0 0 20px #fff, 0 0 30px var(--primary); }
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
+      50% { text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary); }
+    }
+
+    @keyframes burst {
+      0% { transform: scale(1); color: var(--text); }
+      50% { transform: scale(1.4); color: var(--accent); }
+      100% { transform: scale(1); color: var(--text); }
+    }
   </style>
 </head>
 <body>
-    <!-- Add navigation buttons -->
+
+<!-- Navigation -->
 <div style="margin-top: 20px;">
   <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
   <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
@@ -26,14 +140,14 @@
   <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
   <button type="button" onclick="location.href='6.html'">Go to Page 6 (Thomas Doc)</button>
 </div>
-    
-  <h1>Sultan's Devious Course  Review Quiz- 5 (30 Questions)</h1>
-  <form id="quizForm"></form>
-  <div class="result" id="result"></div>
-<!-- ...existing code... -->
+
+<h1 id="quizTitle">Sultan's Devious Course Review Quiz – 5</h1>
+
+<form id="quizForm"></form>
+<div class="result" id="result"></div>
 <button type="button" onclick="checkAnswers()">Submit Answers</button>
 
-<!-- Add navigation buttons -->
+<!-- Repeat Nav for convenience -->
 <div style="margin-top: 20px;">
   <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
   <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
@@ -43,97 +157,181 @@
   <button type="button" onclick="location.href='6.html'">Go to Page 6 (Thomas Doc)</button>
 </div>
 
-<!-- ...existing code... -->
+<script>
+  // 🎨 Theme Picker
+  const themes = [
+    {
+      name: "Purple Pink",
+      "--primary": "#ff3cbb",
+      "--background": "#1f0118",
+      "--card": "#270727",
+      "--accent": "#ffb6f9",
+      "--text": "white",
+      "--correct": "#00ff66",
+      "--incorrect": "#ff4c4c"
+    },
+    {
+      name: "Teal Blue",
+      "--primary": "#00bcd4",
+      "--background": "#003b46",
+      "--card": "#07575b",
+      "--accent": "#66ffff",
+      "--text": "#ffffff",
+      "--correct": "#00ffcc",
+      "--incorrect": "#ff6666"
+    },
+    {
+      name: "Sunset Gold",
+      "--primary": "#ff9900",
+      "--background": "#1a1a1a",
+      "--card": "#333333",
+      "--accent": "#ffd700",
+      "--text": "#fff5cc",
+      "--correct": "#aaff00",
+      "--incorrect": "#ff3300"
+    },
+    {
+      name: "Matrix Green",
+      "--primary": "#00ff00",
+      "--background": "#000000",
+      "--card": "#002200",
+      "--accent": "#66ff66",
+      "--text": "#ccffcc",
+      "--correct": "#00ff00",
+      "--incorrect": "#ff0000"
+    }
+  ];
+  const theme = themes[Math.floor(Math.random() * themes.length)];
+  for (const key in theme) {
+    if (key.startsWith("--")) {
+      document.documentElement.style.setProperty(key, theme[key]);
+    }
+  }
 
-
-  <script>
-      const questions = [
+  // 🧠 Questions
+  const questions = [
       ["What is the output of: print(2 + 3 * 4)?", ["14", "20", "18", "9"], "a"],
-  ["What is the output of: print(abs(-10))?", ["10", "-10", "0", "None"], "b"],
+  ["What is the output of: print(abs(-10))?", ["-10", "10", "0", "None"], "b"],
   ["What is the output of: print(round(5.678, 2))?", ["5.67", "5.68", "5.6", "6.0"], "b"],
-  ["What is the output of: print(math.sqrt(81))?", ["9.0", "8", "81", "None"], "c"],
+  ["What is the output of: print(math.sqrt(81))?", ["81", "8", "9.0", "None"], "c"],
   ["What is the output of: print(math.pow(4, 2))?", ["16.0", "8", "4", "2"], "a"],
-  ["What is the output of: print(9 // 2)?", ["4", "4.5", "5", "3"], "c"],
+  ["What is the output of: print(9 // 2)?", ["4", "4.5", "3", "5"], "d"],
   ["What is the output of: print(10 % 4)?", ["2", "0", "4", "6"], "a"],
   ["What is the output of: print(math.floor(5.9))?", ["5", "6", "4", "5.9"], "a"],
-  ["What is the output of: print(math.ceil(7.1))?", ["8", "7", "7.1", "6"], "b"],
-  ["What is the output of: print(math.fabs(-3.4))?", ["3.4", "-3.4", "0", "4"], "c"],
+  ["What is the output of: print(math.ceil(7.1))?", ["7", "8", "7.1", "6"], "b"],
+  ["What is the output of: print(math.fabs(-3.4))?", ["3.46766676856", "-3.4", "3.4", "4"], "c"],
   ["What is the output of: print(math.factorial(5))?", ["120", "60", "24", "100"], "a"],
-  ["What is the output of: print(divmod(10, 3))?", ["(3, 1)", "(3.3, 1)", "(3, 3)", "(2, 1)"], "d"],
-  ["What is the output of: print(round(2.675, 2))?", ["2.67", "2.68", "2.66", "2.65"], "b"],
-  ["What is the output of: print(math.pi)?", ["3.14159...", "3.14", "3.0", "pi"], "a"],
-  ["What is the output of: print(math.e)?", ["2.71828...", "3.14159", "1.618", "2.0"], "c"],
-  ["What is the output of: print(math.log10(100))?", ["2.0", "1.0", "10", "100"], "a"],
-  ["What is the output of: print(math.exp(1))?", ["2.71828...", "1", "3.14", "e"], "a"],
+  ["What is the output of: print(divmod(10, 3))?", ["(2, 2)", "(3.3, 1)", "(3, 3)", "(3, 1)"], "d"],
+  ["What is the output of: print(round(2.675, 2))?", ["2.68", "2.67", "2.66", "2.65"], "b"],
+  ["What is the output of: print(math.pi)?", ["3.141592653589793", "3.14", "3.0", "pi"], "a"],
+  ["What is the output of: print(math.e)?", ["2.718281828459045", "3.14159", "1.618", "2.0"], "a"],
+  ["What is the output of: print(math.exp(1))?", ["2.718281828459045", "1", "3.14", "e"], "a"],
   ["What is the output of: print(5 ** 3)?", ["125", "15", "25", "5"], "a"],
-  ["What is the output of: print(math.degrees(math.pi))?", ["180.0", "90.0", "3.14", "360.0"], "d"],
   ["What is the output of: print(math.radians(180))?", ["3.141592653589793", "180", "360", "90"], "a"],
-  ["What is the output of: print(math.sin(math.pi / 2))?", ["1.0", "0.0", "-1.0", "0.5"], "a"],
-  ["What is the output of: print(math.cos(0))?", ["1.0", "0.0", "-1.0", "2.0"], "c"],
-  ["What is the output of: print(math.tan(0))?", ["0.0", "1.0", "Infinity", "NaN"], "a"],
   ["What is the output of: print(round(3.14159, 3))?", ["3.142", "3.141", "3.14", "3.1"], "a"],
   ["What is the output of: print(int(7.9))?", ["7", "8", "7.9", "None"], "a"],
   ["What is the output of: print(float(5))?", ["5.0", "5", "0.5", "None"], "a"],
-  ["What is the output of: print(min([2, 8, 1]))?", ["1", "2", "8", "0"], "d"],
-  ["What is the output of: print(max([2, 8, 1]))?", ["8", "2", "1", "0"], "b"],
+  ["What is the output of: print(min([2, 8, 1]))?", ["0", "2", "8", "1"], "d"],
+  ["What is the output of: print(max([2, 8, 1]))?", ["2", "8", "1", "0"], "b"],
   ["What is the output of: print(3 * 4 + 5)?", ["17", "32", "19", "15"], "a"],
-  ["What is the output of: print((3 + 4) * 5)?", ["35", "17", "21", "20"], "c"]
-      ];
-      window.onload = function () {
-      const form = document.getElementById("quizForm");
-      questions.forEach((q, i) => {
-        const div = document.createElement("div");
-        div.className = "question";
-        const qNum = i + 1;
-        div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
-  q[1].map((opt, j) => {
-    const optChar = String.fromCharCode(97 + j);
-    return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
-  }).join('') +
-  `<label><input type="radio" name="q${qNum}" value="null"> <i>Null / Skip this question</i></label><br>` +
-  `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+  ["What is the output of: print((3 + 4) * 5)?", ["35", "17", "21", "20"], "c"],
+  ["What is the output of: print(8 - 2 ** 3 // 4 + 3)?", ["7", "5", "6", "8"], "c"],
+  ["What is the output of: print((10 + 2) * 3 - 4 // 2)?", ["34", "36", "32", "30"], "a"],
+  ["What is the output of: print((2 + 3) * (4 - 1))?", ["15", "20", "12", "9"], "a"],
+  ["What is the output of: print(math.log(100, 10))?", ["2.0", "10", "1", "None"], "a"],
+  ["What is the output of: print(math.pow(2, 3) + math.sqrt(16))?", ["12.0", "10", "8", "None"], "a"],
+  ["What is the output of: print(10 // 3 + 10 % 3)?", ["4", "5", "3", "6"], "b"],
+  ["What is the output of: print((5 + 3) ** 2 - 4 * 2)?", ["60", "64", "56", "48"], "c"],
+  ["What is the output of: print(7 % 3 * 2)?", ["2", "4", "1", "6"], "b"],
+  ["What is the output of: print(3 ** 2 + 1)?", ["10", "9", "8", "11"], "a"],
+  ["What is the output of: print(math.gcd(12, 15))?", ["3", "6", "12", "15"], "a"]
+  ];
 
-        form.appendChild(div);
-        
-      });
-    };
+  document.getElementById("quizTitle").textContent += ` (${questions.length} Questions)`;
 
-    function checkAnswers() {
-      let score = 0;
-      let counted = 0;
-      questions.forEach((q, i) => {
-        const qNum = i + 1;
-        const correct = q[2];
-        const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
-        const feedback = document.getElementById(`feedback${qNum}`);
-        feedback.style.display = 'block';
+  function burstLabel(label) {
+    label.classList.remove("burst");
+    void label.offsetWidth;
+    label.classList.add("burst");
+  }
 
-        if (userAnswer) {
-          if (userAnswer.value === "null") {
-            feedback.textContent = "Question was skipped and not counted.";
-            feedback.className = "answer-feedback";
-            return; // skip counting
-          }
-          counted++; // only count if not null
-          if (userAnswer.value === correct) {
-            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:66px;height:66px;vertical-align:middle;margin-right:6px;">Correct!';
-            feedback.className = "answer-feedback correct";
-            score++;
-          } else {
-            const correctAnswer = q[1][correct.charCodeAt(0) - 97];
-            feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
-            feedback.className = "answer-feedback incorrect";
-          }
-        } else {
-          const correctAnswer = q[1][correct.charCodeAt(0) - 97];
-          feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
-          feedback.className = "answer-feedback incorrect";
-          counted++; // still count unanswered questions
-        }
-      });
+  function attachBurstListeners() {
+    document.querySelectorAll('input[type="radio"]').forEach(input => {
+      input.addEventListener('change', () => burstLabel(input.parentElement));
+    });
+  }
 
-      document.getElementById('result').textContent = `You got ${score} out of ${counted} counted questions correct.`;
+  function shuffleArray(arr) {
+    const copy = arr.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
     }
-  </script>
+    return copy;
+  }
+
+  window.onload = function () {
+    const form = document.getElementById("quizForm");
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      const qNum = i + 1;
+      const shuffledOptions = q[1].map((text, index) => ({
+        text,
+        value: String.fromCharCode(97 + index)
+      })).sort(() => Math.random() - 0.5);
+
+      div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
+        shuffledOptions.map(opt => 
+          `<label><input type="radio" name="q${qNum}" value="${opt.value}"> ${opt.text}</label><br>`
+        ).join('') +
+        `<label><input type="radio" name="q${qNum}" value="null"> <i>Null / Skip this question</i></label><br>` +
+        `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+
+      form.appendChild(div);
+    });
+    attachBurstListeners();
+  };
+
+  function checkAnswers() {
+    let score = 0, counted = 0;
+    questions.forEach((q, i) => {
+      const qNum = i + 1;
+      const correct = q[2];
+      const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
+      const feedback = document.getElementById(`feedback${qNum}`);
+      feedback.style.display = 'block';
+
+      const options = document.querySelectorAll(`input[name="q${qNum}"]`);
+      const optionLabels = [...options].map(input => input.parentElement.textContent.trim());
+
+      if (userAnswer) {
+        if (userAnswer.value === "null") {
+          feedback.textContent = "Question was skipped and not counted.";
+          feedback.className = "answer-feedback";
+          return;
+        }
+        counted++;
+        if (userAnswer.value === correct) {
+          feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:88px;height:88px;vertical-align:middle;margin-right:6px;">Correct!';
+          feedback.className = "answer-feedback correct";
+          score++;
+        } else {
+          const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
+          feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+          feedback.className = "answer-feedback incorrect";
+        }
+      } else {
+        const correctAnswer = optionLabels[correct.charCodeAt(0) - 97];
+        feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
+        feedback.className = "answer-feedback incorrect";
+        counted++;
+      }
+    });
+
+    document.getElementById('result').textContent = `You got ${score} out of ${counted} counted questions correct.`;
+  }
+</script>
+
 </body>
 </html>
