@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMP1112 Full Review Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #1f0118; color:white; font-weight: bold;}
+    .question { margin-bottom: 25px; padding: 15px; background: #270727; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color:white;}
+    .question h3 { margin-bottom: 10px; color:white;}
+    .correct { color: green; font-weight: bold; }
+    .incorrect { color: red; font-weight: bold; }
+    .answer-feedback { margin-top: 5px; display: none; }
+    .result { font-size: 1.2em; font-weight: bold; margin-top: 20px; }
+    button { padding: 10px 20px; background: #4d003e; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #ff3cbb; }
+  </style>
+</head>
+<body>
+    <!-- Add navigation buttons -->
+    <div style="margin-top: 20px;">
+        <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+        <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+        <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+        <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+        <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+    </div>
+    
+  <h1>Sultan's Devious Course  Review Quiz- 5 (30 Questions)</h1>
+  <form id="quizForm"></form>
+  <div class="result" id="result"></div>
+<!-- ...existing code... -->
+<button type="button" onclick="checkAnswers()">Submit Answers</button>
+
+<!-- Add navigation buttons -->
+<div style="margin-top: 20px;">
+  <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+  <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+  <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+  <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+  <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+</div>
+
+<!-- ...existing code... -->
+
+
+  <script>
+      const questions = [
+      ["What is the output of: print(2 + 3 * 4)?", ["14", "20", "18", "9"], "a"],
+  ["What is the output of: print(abs(-10))?", ["10", "-10", "0", "None"], "b"],
+  ["What is the output of: print(round(5.678, 2))?", ["5.67", "5.68", "5.6", "6.0"], "b"],
+  ["What is the output of: print(math.sqrt(81))?", ["9.0", "8", "81", "None"], "c"],
+  ["What is the output of: print(math.pow(4, 2))?", ["16.0", "8", "4", "2"], "a"],
+  ["What is the output of: print(9 // 2)?", ["4", "4.5", "5", "3"], "c"],
+  ["What is the output of: print(10 % 4)?", ["2", "0", "4", "6"], "a"],
+  ["What is the output of: print(math.floor(5.9))?", ["5", "6", "4", "5.9"], "a"],
+  ["What is the output of: print(math.ceil(7.1))?", ["8", "7", "7.1", "6"], "b"],
+  ["What is the output of: print(math.fabs(-3.4))?", ["3.4", "-3.4", "0", "4"], "c"],
+  ["What is the output of: print(math.factorial(5))?", ["120", "60", "24", "100"], "a"],
+  ["What is the output of: print(divmod(10, 3))?", ["(3, 1)", "(3.3, 1)", "(3, 3)", "(2, 1)"], "d"],
+  ["What is the output of: print(round(2.675, 2))?", ["2.67", "2.68", "2.66", "2.65"], "b"],
+  ["What is the output of: print(math.pi)?", ["3.14159...", "3.14", "3.0", "pi"], "a"],
+  ["What is the output of: print(math.e)?", ["2.71828...", "3.14159", "1.618", "2.0"], "c"],
+  ["What is the output of: print(math.log10(100))?", ["2.0", "1.0", "10", "100"], "a"],
+  ["What is the output of: print(math.exp(1))?", ["2.71828...", "1", "3.14", "e"], "a"],
+  ["What is the output of: print(5 ** 3)?", ["125", "15", "25", "5"], "a"],
+  ["What is the output of: print(math.degrees(math.pi))?", ["180.0", "90.0", "3.14", "360.0"], "d"],
+  ["What is the output of: print(math.radians(180))?", ["3.14159...", "180", "360", "90"], "a"],
+  ["What is the output of: print(math.sin(math.pi / 2))?", ["1.0", "0.0", "-1.0", "0.5"], "a"],
+  ["What is the output of: print(math.cos(0))?", ["1.0", "0.0", "-1.0", "2.0"], "c"],
+  ["What is the output of: print(math.tan(0))?", ["0.0", "1.0", "Infinity", "NaN"], "a"],
+  ["What is the output of: print(round(3.14159, 3))?", ["3.142", "3.141", "3.14", "3.1"], "a"],
+  ["What is the output of: print(int(7.9))?", ["7", "8", "7.9", "None"], "a"],
+  ["What is the output of: print(float(5))?", ["5.0", "5", "0.5", "None"], "a"],
+  ["What is the output of: print(min([2, 8, 1]))?", ["1", "2", "8", "0"], "d"],
+  ["What is the output of: print(max([2, 8, 1]))?", ["8", "2", "1", "0"], "b"],
+  ["What is the output of: print(3 * 4 + 5)?", ["17", "32", "19", "15"], "a"],
+  ["What is the output of: print((3 + 4) * 5)?", ["35", "17", "21", "20"], "c"]
+      ];
+      window.onload = function () {
+      const form = document.getElementById("quizForm");
+      questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.className = "question";
+        const qNum = i + 1;
+        div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
+          q[1].map((opt, j) => {
+            const optChar = String.fromCharCode(97 + j);
+            return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
+          }).join('') +
+          `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+        form.appendChild(div);
+      });
+    };
+
+    function checkAnswers() {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const qNum = i + 1;
+        const correct = q[2];
+        const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
+        const feedback = document.getElementById(`feedback${qNum}`);
+        feedback.style.display = 'block';
+        if (userAnswer) {
+          if (userAnswer.value === correct) {
+            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;">Correct!';
+            feedback.className = "answer-feedback correct";
+            score++;
+          } else {
+            const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+            feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            feedback.className = "answer-feedback incorrect";
+          }
+        } else {
+          const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+          feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
+          feedback.className = "answer-feedback incorrect";
+        }
+      });
+      document.getElementById('result').textContent = `You got ${score} out of ${questions.length} correct.`;
+    }
+  </script>
+</body>
+</html>

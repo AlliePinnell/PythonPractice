@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMP1112 Full Review Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #011f0a; color:white; font-weight: bold;}
+    .question { margin-bottom: 25px; padding: 15px; background: #072708; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color:white;}
+    .question h3 { margin-bottom: 10px; color:white;}
+    .correct { color: green; font-weight: bold; }
+    .incorrect { color: red; font-weight: bold; }
+    .answer-feedback { margin-top: 5px; display: none; }
+    .result { font-size: 1.2em; font-weight: bold; margin-top: 20px; }
+    button { padding: 10px 20px; background: #004d11; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #3cff46; }
+  </style>
+</head>
+<body>
+    <!-- Add navigation buttons -->
+    <div style="margin-top: 20px;">
+        <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+        <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+        <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+        <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+        <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+    </div>
+    
+  <h1>Sultan's Devious Course  Review Quiz- 2 (47 Questions)</h1>
+  <form id="quizForm"></form>
+  <div class="result" id="result"></div>
+<!-- ...existing code... -->
+<button type="button" onclick="checkAnswers()">Submit Answers</button>
+
+<!-- Add navigation buttons -->
+<div style="margin-top: 20px;">
+    <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+    <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+    <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+    <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+    <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+</div>
+
+<!-- ...existing code... -->
+
+
+  <script>
+      const questions = [
+      ["What method opens a file for reading in Python?", ["file.read()", "open('file')", "open('file', 'r')", "read('file')"], "c"],
+  ["What keyword is used to handle exceptions?", ["try", "handle", "except", "catch"], "c"],
+  ["What does the 'finally' block do in exception handling?", ["Executes only on error", "Always executes", "Executes if no error", "Skips execution"], "b"],
+  ["Which of these is used for matching patterns?", ["pyinputplus", "regex", "re", "string"], "c"],
+  ["Which method checks if a string starts with a specified value?", ["starts()", "startswith()", "begin()", "checkstart()"], "b"],
+  ["How do you append to a file in Python?", ["'r+'", "'a'", "'w'", "'x'"], "b"],
+  ["What does re.findall() return?", ["First match", "Boolean", "List of matches", "Number of matches"], "c"],
+  ["Which keyword is used to define a class in Python?", ["object", "define", "class", "type"], "c"],
+  ["Which of these is a magic method in Python?", ["__init__", "construct", "new__", "__class__"], "a"],
+  ["What is 'self' in a class method?", ["A variable", "Reference to instance", "Parent object", "None"], "b"],
+  ["What does the 'with' keyword do in file handling?", ["Opens permanently", "Closes file manually", "Manages context", "Ignores errors"], "c"],
+  ["What is the output of 'Hello'.upper()?", ["hello", "HELLO", "Hello", "error"], "b"],
+  ["How do you catch multiple exceptions?", ["Multiple try blocks", "Multiple catch blocks", "except (A, B):", "try (A, B):"], "c"],
+  ["What is __str__ used for in a class?", ["Returns object memory", "Returns a readable string", "Initializes object", "Nothing"], "b"],
+  ["What does re.match() do?", ["Matches pattern anywhere", "Only at start", "Matches all", "None"], "b"],
+  ["What file mode creates a new file?", ["'w'", "'a'", "'x'", "'r'"], "c"],
+  ["What exception is raised by int('abc')?", ["ValueError", "NameError", "TypeError", "IndexError"], "a"],
+  ["Which of these is a method of list comprehension?", ["filter", "for-in if", "lambda", "map"], "b"],
+  ["Which method reads one line at a time from a file?", ["readline()", "read()", "readall()", "readlines()"], "a"],
+  ["What method is used to test a substring in a string?", ["test()", "in", "check()", "find()"], "b"],
+  ["Which keyword is used to create a generator in Python?", ["gen", "return", "yield", "produce"], "c"],
+  ["Which string method removes whitespace from both ends?", ["remove()", "strip()", "trim()", "erase()"], "b"],
+  ["Which method removes an item from a list by value?", ["pop()", "delete()", "remove()", "clear()"], "c"],
+  ["Which method returns the position of a substring?", ["locate()", "position()", "find()", "indexof()"], "c"],
+  ["Which module helps write tests in Python?", ["testlib", "doctest", "validator", "pyunit"], "b"],
+  ["Which is used to check for a specific exception type?", ["if error", "except TypeError", "try TypeError", "handle"], "b"],
+  ["How to declare a class with a parent?", ["class Child: Parent", "class Child(Parent):", "Child inherits Parent", "new Child(Parent)"], "b"],
+  ["Which method adds a new attribute to an object?", ["insert", "setattr", "addattr", "property"], "b"],
+  ["What’s the result of 'Python'[0]?", ["P", "y", "n", "o"], "a"],
+  ["What does isinstance(obj, Class) return?", ["True if match", "False always", "Error", "None"], "a"],
+  ["Which function writes to a file?", ["put()", "print()", "write()", "echo()"], "c"],
+  ["What is '__name__' used for?", ["Module detection", "File path", "Function name", "Class name"], "a"],
+  ["Which of these is not a built-in exception?", ["SyntaxError", "BreakError", "TypeError", "ValueError"], "b"],
+  ["Which method creates a list from a string split by spaces?", ["split()", "explode()", "divide()", "chop()"], "a"],
+  ["Which method combines strings in a list?", ["merge()", "concat()", "join()", "combine()"], "c"],
+  ["How do you check if file exists?", ["os.check()", "os.filecheck()", "os.path.exists()", "file.exists()"], "c"],
+  ["Which of these creates a dictionary comprehension?", ["dict[...]", "{k:v for ...}", "new dict()", "list2dict"], "b"],
+  ["Which of the following types is mutable?", ["str", "tuple", "list", "int"], "c"],
+  ["What is the purpose of __repr__ in a class?", ["For print()", "Developer representation", "Initializer", "Destructor"], "b"],
+  ["What does 'raise' keyword do?", ["Handle error", "Ignore error", "Throw exception", "Stop script"], "c"],
+  ["Which function returns all built-in exceptions?", ["exceptions()", "dir(__builtins__)", "get_errors()", "sys.errors()"], "b"],
+  ["Which built-in module handles command-line arguments?", ["argparse", "sys", "cli", "console"], "a"],
+  ["What does 'pass' do in a block?", ["Breaks", "Raises error", "Does nothing", "Exits"], "c"],
+  ["Which format is used to save structured data in Python?", ["TXT", "YAML", "CSV", "JSON"], "d"],
+  ["What does '__del__' method do?", ["Create object", "Print object", "Delete object", "Nothing"], "c"],
+  ["How do you define a multi-line string?", ["quotes", "''' or \"\"\"", "str()", "multistr()"], "b"],
+  ["Which of these is a built-in testing module?", ["unitest", "unittest", "pytest", "testpy"], "b"]
+      ];
+      window.onload = function () {
+      const form = document.getElementById("quizForm");
+      questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.className = "question";
+        const qNum = i + 1;
+        div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
+          q[1].map((opt, j) => {
+            const optChar = String.fromCharCode(97 + j);
+            return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
+          }).join('') +
+          `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+        form.appendChild(div);
+      });
+    };
+
+    function checkAnswers() {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const qNum = i + 1;
+        const correct = q[2];
+        const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
+        const feedback = document.getElementById(`feedback${qNum}`);
+        feedback.style.display = 'block';
+        if (userAnswer) {
+          if (userAnswer.value === correct) {
+            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;">Correct!';
+            feedback.className = "answer-feedback correct";
+            score++;
+          } else {
+            const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+            feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            feedback.className = "answer-feedback incorrect";
+          }
+        } else {
+          const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+          feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
+          feedback.className = "answer-feedback incorrect";
+        }
+      });
+      document.getElementById('result').textContent = `You got ${score} out of ${questions.length} correct.`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMP1112 Full Review Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #03011f; color:white; font-weight: bold;}
+    .question { margin-bottom: 25px; padding: 15px; background: #0c0727; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color:white;}
+    .question h3 { margin-bottom: 10px; color:white;}
+    .correct { color: green; font-weight: bold; }
+    .incorrect { color: red; font-weight: bold; }
+    .answer-feedback { margin-top: 5px; display: none; }
+    .result { font-size: 1.2em; font-weight: bold; margin-top: 20px; }
+    button { padding: 10px 20px; background: #08004d; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #833cff; }
+  </style>
+</head>
+<body>
+    <!-- Add navigation buttons -->
+    <div style="margin-top: 20px;">
+        <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+        <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+        <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+        <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+        <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+    </div>
+    
+  <h1>Sultan's Devious Course  Review Quiz- 4 (49 Questions)</h1>
+  <form id="quizForm"></form>
+  <div class="result" id="result"></div>
+<!-- ...existing code... -->
+<button type="button" onclick="checkAnswers()">Submit Answers</button>
+
+<!-- Add navigation buttons -->
+<div style="margin-top: 20px;">
+  <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+  <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+  <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+  <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+  <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+</div>
+
+<!-- ...existing code... -->
+
+
+  <script>
+      const questions = [
+      ["What is the output of: print(2 * 3 + 1)?", ["7", "8", "9", "5"], "a"],
+  ["What is the output of: print('Hello' + 'World')?", ["HelloWorld", "Hello World", "Hello+World", "Error"], "a"],
+  ["What is the output of: print(len([1, 2, 3, 4]))?", ["3", "4", "5", "None"], "b"],
+  ["What is the output of: print(10 // 3)?", ["3", "3.33", "4", "3.0"], "a"],
+  ["What is the output of: print(10 % 3)?", ["1", "2", "0", "3"], "b"],
+  ["What is the output of: print(bool('False'))?", ["False", "True", "None", "Error"], "b"],
+  ["What is the output of: print([1, 2] * 2)?", ["[1, 2, 1, 2]", "[2, 4]", "[1, 2, 2, 4]", "[1, 1, 2, 2]"], "a"],
+  ["What is the output of: print('A' * 3)?", ["AAA", "A3", "AA", "Error"], "a"],
+  ["What is the output of: print([1,2,3][1])?", ["1", "2", "3", "Error"], "b"],
+  ["What is the output of: print('Python'[0])?", ["P", "y", "n", "o"], "a"],
+  ["What is the output of: print(type([]))?", ["list", "<class 'list'>", "<type 'list'>", "list[]"], "b"],
+  ["What is the output of: print('1' + '2')?", ["3", "12", "'12'", "'3'"], "b"],
+  ["What is the output of: print('a' in 'cat')?", ["True", "False", "None", "Error"], "a"],
+  ["What is the output of: print('cat'.find('a'))?", ["1", "0", "2", "-1"], "a"],
+  ["What is the output of: print('cat'.find('x'))?", ["-1", "0", "None", "Error"], "a"],
+  ["What is the output of: print(3 > 2 and 2 > 1)?", ["True", "False", "None", "Error"], "a"],
+  ["What is the output of: print(3 < 2 or 2 < 1)?", ["True", "False", "None", "Error"], "b"],
+  ["What is the output of: print(not True)?", ["False", "True", "None", "Error"], "a"],
+  ["What is the output of: print(type(None))?", ["<class 'NoneType'>", "None", "NoneType", "<type>"], "a"],
+  ["What is the output of: print(len(' '))?", ["1", "0", "2", "Error"], "a"],
+  ["What is the output of: print('Hello'.lower())?", ["hello", "HELLO", "Hello", "None"], "a"],
+  ["What is the output of: print('HELLO'.isupper())?", ["True", "False", "None", "Error"], "a"],
+  ["What is the output of: print(5 == 5.0)?", ["True", "False", "Error", "None"], "a"],
+  ["What is the output of: print(type(5 == 5.0))?", ["bool", "int", "float", "str"], "a"],
+  ["What is the output of: print(list('abc'))?", ["['a', 'b', 'c']", "abc", "[abc]", "['abc']"], "a"],
+  ["What is the output of: print(','.join(['a','b']))?", ["a,b", "ab", "a b", "['a','b']"], "a"],
+  ["What is the output of: print([i for i in range(3)])?", ["[0, 1, 2]", "0 1 2", "range(3)", "[1, 2, 3]"], "a"],
+  ["What is the output of: print('a' * 0)?", ["''", "a", "0", "Error"], "a"],
+  ["What is the output of: print(len({}))?", ["0", "1", "None", "Error"], "a"],
+  ["What is the output of: print(10 / 4)?", ["2.5", "2", "2.0", "2.25"], "a"],
+  ["What is the output of: print(10 ** 2)?", ["100", "20", "10", "200"], "a"],
+  ["What is the output of: print(10 != 5)?", ["True", "False", "None", "Error"], "a"],
+  ["What is the output of: print('Hello {}'.format('World'))?", ["Hello World", "World Hello", "Hello {}", "Hello"], "a"],
+  ["What is the output of: print('{} {}'.format('Hi','There'))?", ["Hi There", "There Hi", "HiThere", "Error"], "a"],
+  ["What is the output of: print(bool([]))?", ["False", "True", "Error", "None"], "a"],
+  ["What is the output of: print(bool([0]))?", ["True", "False", "None", "Error"], "a"],
+  ["What is the output of: print([1,2,3][-1])?", ["3", "2", "1", "Error"], "a"],
+  ["What is the output of: print({1, 2, 3} == {3, 2, 1})?", ["True", "False", "Error", "None"], "a"],
+  ["What is the output of: print(type(lambda x: x))?", ["function", "<class 'function'>", "lambda", "<lambda>"], "b"],
+  ["What is the output of: print(sum([1,2,3]))?", ["6", "5", "1", "None"], "a"],
+  ["What is the output of: print(list(range(5, 0, -1)))?", ["[5,4,3,2,1]", "[1,2,3,4,5]", "[0,1,2,3,4]", "Error"], "a"],
+  ["What is the output of: print('test'.capitalize())?", ["Test", "test", "TEST", "tEST"], "a"],
+  ["What is the output of: print([].append(1))?", ["None", "[1]", "Error", "1"], "a"],
+  ["What is the output of: print(list(map(str, [1, 2])))?", ["['1', '2']", "[1, 2]", "['str', 'str']", "Error"], "a"],
+  ["What is the output of: print(any([False, True, False]))?", ["True", "False", "None", "Error"], "a"],
+  ["What is the output of: print(all([True, True, False]))?", ["False", "True", "None", "Error"], "a"],
+  ["What is the output of: print(round(3.14159, 2))?", ["3.14", "3.1", "3.142", "3.0"], "a"],
+  ["What is the output of: print(max([1, 2, 3]))?", ["3", "2", "1", "Error"], "a"],
+  ["What is the output of: print(min([1, 2, 3]))?", ["1", "2", "3", "Error"], "a"]
+      ];
+      window.onload = function () {
+      const form = document.getElementById("quizForm");
+      questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.className = "question";
+        const qNum = i + 1;
+        div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
+          q[1].map((opt, j) => {
+            const optChar = String.fromCharCode(97 + j);
+            return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
+          }).join('') +
+          `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+        form.appendChild(div);
+      });
+    };
+
+    function checkAnswers() {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const qNum = i + 1;
+        const correct = q[2];
+        const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
+        const feedback = document.getElementById(`feedback${qNum}`);
+        feedback.style.display = 'block';
+        if (userAnswer) {
+          if (userAnswer.value === correct) {
+            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;">Correct!';
+            feedback.className = "answer-feedback correct";
+            score++;
+          } else {
+            const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+            feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            feedback.className = "answer-feedback incorrect";
+          }
+        } else {
+          const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+          feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
+          feedback.className = "answer-feedback incorrect";
+        }
+      });
+      document.getElementById('result').textContent = `You got ${score} out of ${questions.length} correct.`;
+    }
+  </script>
+</body>
+</html>

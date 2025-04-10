@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMP1112 Full Review Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #011b1f; color:white; font-weight: bold;}
+    .question { margin-bottom: 25px; padding: 15px; background: #072627; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color:white;}
+    .question h3 { margin-bottom: 10px; color:white;}
+    .correct { color: green; font-weight: bold; }
+    .incorrect { color: red; font-weight: bold; }
+    .answer-feedback { margin-top: 5px; display: none; }
+    .result { font-size: 1.2em; font-weight: bold; margin-top: 20px; }
+    button { padding: 10px 20px; background: #004d47; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #3cffff; }
+  </style>
+</head>
+<body>
+    <!-- Add navigation buttons -->
+    <div style="margin-top: 20px;">
+      <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+      <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+      <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+      <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+      <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+    </div>
+    
+  <h1>Sultan's Devious Course  Review Quiz- 3 (48 Questions)</h1>
+  <form id="quizForm"></form>
+  <div class="result" id="result"></div>
+<!-- ...existing code... -->
+<button type="button" onclick="checkAnswers()">Submit Answers</button>
+
+<!-- Add navigation buttons -->
+<div style="margin-top: 20px;">
+  <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+  <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+  <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+  <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+  <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+</div>
+
+<!-- ...existing code... -->
+
+
+  <script>
+      const questions = [
+      ["What is the purpose of the 'random' module in Python?", ["Database access", "Generating random values", "Sorting algorithms", "Web scraping"], "b"],
+  ["Which method generates a random integer in a range?", ["random.between()", "random.range()", "random.randint()", "random.gen()"], "c"],
+  ["What does random.choice() do?", ["Chooses a string", "Chooses a number", "Chooses a random element from a list", "None of the above"], "c"],
+  ["Which module is commonly used for dates and times in Python?", ["calendar", "time", "datetime", "clock"], "c"],
+  ["What does datetime.now() return?", ["Current date", "Current time", "Current datetime", "None"], "c"],
+  ["What is the format for specifying date/time with strftime()?", ["dd-mm-yyyy", "%d-%m-%Y", "d/m/y", "Y-m-d"], "b"],
+  ["Which method can delay execution of a Python script?", ["time.sleep()", "datetime.pause()", "wait()", "delay()"], "a"],
+  ["What does 'import math' allow access to?", ["Machine learning", "Advanced math functions", "Memory management", "Networking"], "b"],
+  ["Which function returns the square root of a number?", ["root()", "sqrt()", "square()", "math.root()"], "b"],
+  ["How to get the absolute value in Python?", ["abs()", "absolute()", "fabs()", "absval()"], "a"],
+  ["Which math function returns the largest integer less than or equal to a value?", ["ceil()", "floor()", "truncate()", "round()"], "b"],
+  ["Which Python module supports precise decimal arithmetic?", ["precise", "decimal", "float", "math"], "b"],
+  ["What is the default precision of Decimal()?", ["28 places", "15 places", "Infinite", "2 places"], "a"],
+  ["Which function is used to round a number to a specified number of decimals?", ["floor()", "round()", "truncate()", "cut()"], "b"],
+  ["What module is used for handling CSV files?", ["csvtool", "dataparse", "csv", "textparse"], "c"],
+  ["Which method reads CSV content line by line?", ["csv.load()", "csv.reader()", "csv.read()", "csv.parse()"], "b"],
+  ["Which module provides tools to work with ZIP files?", ["zip", "ziptools", "zipfile", "filezip"], "c"],
+  ["How do you write to a CSV file?", ["csv.output()", "csv.writer()", "csv.writeline()", "csv.write()"], "b"],
+  ["Which function is used to unpack values from a list?", ["spread()", "explode()", "unpack()", "*"], "d"],
+  ["Which module lets you serialize Python objects?", ["serialize", "pickle", "json", "marshal"], "b"],
+  ["Which function writes a Python object to a file in binary?", ["pickle.save()", "pickle.dump()", "pickle.write()", "pickle.push()"], "b"],
+  ["How do you convert a list to a JSON string?", ["json.dump()", "json.write()", "json.dumps()", "json.push()"], "c"],
+  ["What is the purpose of the 'os.environ' dictionary?", ["User input", "Environment variables", "System logs", "App config"], "b"],
+  ["Which module supports command-line argument parsing?", ["cmd", "argparse", "cli", "os.args"], "b"],
+  ["How to add a command-line argument in argparse?", ["add_param", "add_argument", "add_arg", "register_arg"], "b"],
+  ["What does sys.argv return?", ["Script name only", "Command output", "List of command-line args", "Error code"], "c"],
+  ["Which operator is used in list comprehension for condition?", ["if", "filter", "?", ":"], "a"],
+  ["Which type of function is defined using def but without a return?", ["Method", "Void", "Procedure", "None-returning"], "a"],
+  ["What does map() return?", ["Set", "List", "Iterator", "String"], "c"],
+  ["What does filter() do in Python?", ["Removes None", "Removes by condition", "Sorts", "Deletes duplicates"], "b"],
+  ["Which structure would be best to model a key-value phonebook?", ["List", "Tuple", "Dict", "Set"], "c"],
+  ["Which built-in function sorts items in a list?", ["order()", "arrange()", "sort()", "sequence()"], "c"],
+  ["What is the output of list(range(2, 10, 2))?", ["[2,3,4,5,6,7,8,9]", "[2,4,6,8]", "[3,5,7,9]", "[2,6,10]"], "b"],
+  ["What does enumerate() do?", ["Counts characters", "Zips list", "Returns index and value", "Sorts list"], "c"],
+  ["What type does zip() return?", ["dict", "list", "zip object", "tuple"], "c"],
+  ["Which function checks if all elements are true?", ["any()", "all()", "every()", "true()"], "b"],
+  ["Which function returns true if at least one item is true?", ["all()", "some()", "any()", "each()"], "c"],
+  ["What is the output of bool([])?", ["True", "False", "Error", "None"], "b"],
+  ["Which module can be used to generate secure tokens?", ["hashlib", "secrets", "crypto", "uuid"], "b"],
+  ["Which function gets a random element without repeating?", ["random.pick()", "random.choice()", "random.sample()", "random.shuffle()"], "c"],
+  ["What does collections.Counter() return?", ["Sum", "Dictionary of counts", "List", "Tuple"], "b"],
+  ["Which built-in can reverse a list?", ["flip()", "reverse()", "reversed()", "invert()"], "c"],
+  ["Which keyword defines an inline anonymous function?", ["lambda", "def", "func", "inline"], "a"],
+  ["What does the keyword 'global' do?", ["Makes a variable global", "Deletes globals", "Imports global scope", "Creates constants"], "a"],
+  ["What does dir() return?", ["Methods and attributes", "Errors", "File list", "Arguments"], "a"],
+  ["What is the type of None in Python?", ["int", "NoneType", "null", "undefined"], "b"],
+  ["Which function converts a string to a list of characters?", ["list()", "charlist()", "split()", "explode()"], "a"],
+  ["Which library is used for unit testing?", ["unittest", "pyunit", "pytest", "doctest"], "a"]
+      ];
+      window.onload = function () {
+      const form = document.getElementById("quizForm");
+      questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.className = "question";
+        const qNum = i + 1;
+        div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
+          q[1].map((opt, j) => {
+            const optChar = String.fromCharCode(97 + j);
+            return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
+          }).join('') +
+          `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+        form.appendChild(div);
+      });
+    };
+
+    function checkAnswers() {
+      let score = 0;
+      questions.forEach((q, i) => {
+        const qNum = i + 1;
+        const correct = q[2];
+        const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
+        const feedback = document.getElementById(`feedback${qNum}`);
+        feedback.style.display = 'block';
+        if (userAnswer) {
+          if (userAnswer.value === correct) {
+            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;">Correct!';
+            feedback.className = "answer-feedback correct";
+            score++;
+          } else {
+            const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+            feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            feedback.className = "answer-feedback incorrect";
+          }
+        } else {
+          const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+          feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
+          feedback.className = "answer-feedback incorrect";
+        }
+      });
+      document.getElementById('result').textContent = `You got ${score} out of ${questions.length} correct.`;
+    }
+  </script>
+</body>
+</html>
