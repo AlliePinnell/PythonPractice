@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMP1112 Full Review Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #161f01; color:white; font-weight: bold;}
+    .question { margin-bottom: 25px; padding: 15px; background: #222707; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color:white;}
+    .question h3 { margin-bottom: 10px; color:white;}
+    .correct { color: green; font-weight: bold; }
+    .incorrect { color: red; font-weight: bold; }
+    .answer-feedback { margin-top: 5px; display: none; }
+    .result { font-size: 1.2em; font-weight: bold; margin-top: 20px; }
+    button { padding: 10px 20px; background: #4a4d00; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #dbff3c; }
+  </style>
+</head>
+<body>
+    <!-- Add navigation buttons -->
+    <div style="margin-top: 20px;">
+        <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+        <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
+        <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+        <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+        <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+        <button type="button" onclick="location.href='6.html'">Go to Page 6 (Thomas Doc)</button>
+    </div>
+    
+  <h1>Sultan's Devious Course  Review Quiz- 6 (54 Questions)</h1>
+  <form id="quizForm"></form>
+  <div class="result" id="result"></div>
+<!-- ...existing code... -->
+<button type="button" onclick="checkAnswers()">Submit Answers</button>
+
+<!-- Add navigation buttons -->
+<div style="margin-top: 20px;">
+  <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+  <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
+  <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+  <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+  <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+  <button type="button" onclick="location.href='6.html'">Go to Page 6 (Thomas Doc)</button>
+</div>
+
+<!-- ...existing code... -->
+
+
+  <script>
+const questions = [
+  ["Which of the following is a valid variable name?", ["1stName", "first name", "first_name", "first-name"], "c"],
+  ["Which operator is used for exponentiation?", ["^", "**", "//", "%%"], "b"],
+  ["What is the default value of the 'end' parameter in print()?", ["None", "' '", "'\\n'", "'\\t'"], "c"],
+  ["Which of the following is a comment in Python?", ["// comment", "# comment", "<!-- comment -->", "/* comment */"], "b"],
+  ["What does the function input() return by default?", ["int", "float", "str", "bool"], "c"],
+  ["What error occurs when adding a string and an integer?", ["NameError", "SyntaxError", "ValueError", "TypeError"], "d"],
+  ["What does len('Python') return?", ["5", "6", "7", "Error"], "b"],
+  ["Which function tells the data type of a value?", ["typeof()", "type()", "dtype()", "dataclass()"], "b"],
+  ["Which conversion results in 1.0?", ["float(1)", "float('1')", "float(1.0)", "All of the above"], "d"],
+  ["What is the result of int(3.99)?", ["3", "4", "Error", "3.99"], "a"],
+  ["Which operator returns the remainder of division?", ["//", "/", "%", "**"], "c"],
+  ["Which of the following are comparison operators?", ["and, or", "==, !=, <", "+, -", "in, not in"], "b"],
+  ["Which logical operator returns True if both operands are True?", ["or", "and", "not", "xor"], "b"],
+  ["What does ~a return if a = 10?", ["-10", "-11", "9", "11"], "b"],
+  ["What does the 'is' operator check?", ["Equality", "Identity", "Membership", "Length"], "b"],
+  ["Which of the following checks if a key exists in a dictionary?", ["key.exists()", "key in dict", "dict.has_key(key)", "dict.contains(key)"], "b"],
+  ["Which data type is immutable?", ["List", "Set", "Dictionary", "Tuple"], "d"],
+  ["What is the result of 'Hi' * 3?", ["Hi3", "HiHiHi", "Error", "'Hi'*3"], "b"],
+  ["Which of the following is a raw string?", ["'\\n'", "r'\\n'", "raw('\\n')", "rawstr('\\n')"], "b"],
+  ["What is the output of 'Hello World'[0:5]?", ["Hello", "World", "o Wo", "Hell"], "a"],
+  ["Which string method converts all characters to lowercase?", ["toLower()", "lower()", "tolowercase()", "casefold()"], "b"],
+  ["Which method splits a string into a list?", ["break()", "split()", "divide()", "chop()"], "b"],
+  ["Which method joins list elements into a string?", ["merge()", "attach()", "join()", "combine()"], "c"],
+  ["What is the result of 'hello'.count('l')?", ["1", "2", "3", "4"], "c"],
+  ["What does strip() do?", ["Removes all characters", "Removes whitespace from both ends", "Converts string to list", "Makes text uppercase"], "b"],
+  ["What list method adds a value to the end?", ["append()", "insert()", "add()", "push()"], "a"],
+  ["Which method removes a specific value from a list?", ["discard()", "remove()", "pop()", "delete()"], "b"],
+  ["Which method removes the last element by default?", ["del()", "remove()", "pop()", "clear()"], "c"],
+  ["Which method returns the index of the first matching value?", ["position()", "find()", "index()", "locate()"], "c"],
+  ["What does .sort() do?", ["Returns a new sorted list", "Sorts the original list", "Shuffles the list", "Filters the list"], "b"],
+  ["What does dict.keys() return?", ["Key list", "Key-value pairs", "Values only", "Index list"], "a"],
+  ["Which of the following is true about sets?", ["They allow duplicates", "They are ordered", "They are immutable", "They remove duplicates"], "d"],
+  ["What does set1.intersection(set2) return?", ["Union", "Difference", "Common elements", "All elements"], "c"],
+  ["What is the syntax of an if statement?", ["if condition then:", "if (condition):", "if = condition:", "if -> condition"], "b"],
+  ["Which loop continues until a condition is false?", ["for", "while", "loop", "repeat"], "b"],
+  ["Which keyword skips the rest of the loop and goes to the next iteration?", ["skip", "pass", "continue", "next"], "c"],
+  ["Which keyword ends a loop immediately?", ["exit", "stop", "return", "break"], "d"],
+  ["Which statement does nothing?", ["pass", "continue", "skip", "return"], "a"],
+  ["Which function defines a new function?", ["define()", "new()", "def", "func"], "c"],
+  ["Which error is raised if a function is called before it is defined?", ["SyntaxError", "IndentationError", "NameError", "TypeError"], "c"],
+  ["What kind of function uses *args?", ["Arbitrary positional arguments", "Keyword arguments", "Default arguments", "Fixed arguments"], "a"],
+  ["What kind of function uses **kwargs?", ["Keyword only", "Default only", "Arbitrary keyword arguments", "Tuple arguments"], "c"],
+  ["Which keyword makes a local variable global?", ["nonlocal", "global", "scope", "access"], "b"],
+  ["What must you import to use math functions?", ["mathlib", "numbers", "math", "cmath"], "c"],
+  ["Which function gives the square root of x?", ["math.square()", "math.root()", "math.sqrt()", "sqrt()"], "c"],
+  ["What does math.ceil(3.1) return?", ["3", "3.0", "4", "3.5"], "c"],
+  ["Which function returns a random float between 0 and 1?", ["random.randint()", "random.rand()", "random.random()", "random.float()"], "c"],
+  ["What does random.seed(x) do?", ["Stops random", "Repeats randomness", "Sets seed for reproducibility", "Returns random seed"], "c"],
+  ["Which syntax defines a lambda function?", ["def lambda x: x+1", "lambda x: x+1", "fn x => x+1", "function x: x+1"], "b"],
+  ["Which higher-order function filters values?", ["map()", "filter()", "reduce()", "zip()"], "b"],
+  ["Which higher-order function transforms each value?", ["filter()", "map()", "reduce()", "zip()"], "b"],
+  ["Which function reduces a list to a single value?", ["compress()", "shrink()", "reduce()", "combine()"], "c"],
+  ["Which syntax is correct for list comprehension?", ["[x for x in lst]", "for x in lst: x", "[x, x in lst]", "list[x in lst]"], "a"],
+  ["Which statement best defines recursion?", ["Function calls itself", "Function loops forever", "Function creates a list", "Function is anonymous"], "a"]
+];
+window.onload = function () {
+      const form = document.getElementById("quizForm");
+      questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.className = "question";
+        const qNum = i + 1;
+        div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
+  q[1].map((opt, j) => {
+    const optChar = String.fromCharCode(97 + j);
+    return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
+  }).join('') +
+  `<label><input type="radio" name="q${qNum}" value="null"> <i>Null / Skip this question</i></label><br>` +
+  `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+
+        form.appendChild(div);
+        
+      });
+    };
+
+    function checkAnswers() {
+      let score = 0;
+      let counted = 0;
+      questions.forEach((q, i) => {
+        const qNum = i + 1;
+        const correct = q[2];
+        const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
+        const feedback = document.getElementById(`feedback${qNum}`);
+        feedback.style.display = 'block';
+
+        if (userAnswer) {
+          if (userAnswer.value === "null") {
+            feedback.textContent = "Question was skipped and not counted.";
+            feedback.className = "answer-feedback";
+            return; // skip counting
+          }
+          counted++; // only count if not null
+          if (userAnswer.value === correct) {
+            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:66px;height:66px;vertical-align:middle;margin-right:6px;">Correct!';
+            feedback.className = "answer-feedback correct";
+            score++;
+          } else {
+            const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+            feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            feedback.className = "answer-feedback incorrect";
+          }
+        } else {
+          const correctAnswer = q[1][correct.charCodeAt(0) - 97];
+          feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
+          feedback.className = "answer-feedback incorrect";
+          counted++; // still count unanswered questions
+        }
+      });
+
+      document.getElementById('result').textContent = `You got ${score} out of ${counted} counted questions correct.`;
+    }
+  </script>
+</body>
+</html>

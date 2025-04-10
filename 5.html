@@ -18,13 +18,14 @@
 </head>
 <body>
     <!-- Add navigation buttons -->
-    <div style="margin-top: 20px;">
-        <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
-        <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
-        <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
-        <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
-        <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
-    </div>
+<div style="margin-top: 20px;">
+  <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+  <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
+  <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+  <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+  <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+  <button type="button" onclick="location.href='6.html'">Go to Page 6 (Thomas Doc)</button>
+</div>
     
   <h1>Sultan's Devious Course  Review Quiz- 5 (30 Questions)</h1>
   <form id="quizForm"></form>
@@ -35,10 +36,11 @@
 <!-- Add navigation buttons -->
 <div style="margin-top: 20px;">
   <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
-  <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+  <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
   <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
   <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
   <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+  <button type="button" onclick="location.href='6.html'">Go to Page 6 (Thomas Doc)</button>
 </div>
 
 <!-- ...existing code... -->
@@ -65,7 +67,7 @@
   ["What is the output of: print(math.exp(1))?", ["2.71828...", "1", "3.14", "e"], "a"],
   ["What is the output of: print(5 ** 3)?", ["125", "15", "25", "5"], "a"],
   ["What is the output of: print(math.degrees(math.pi))?", ["180.0", "90.0", "3.14", "360.0"], "d"],
-  ["What is the output of: print(math.radians(180))?", ["3.14159...", "180", "360", "90"], "a"],
+  ["What is the output of: print(math.radians(180))?", ["3.141592653589793", "180", "360", "90"], "a"],
   ["What is the output of: print(math.sin(math.pi / 2))?", ["1.0", "0.0", "-1.0", "0.5"], "a"],
   ["What is the output of: print(math.cos(0))?", ["1.0", "0.0", "-1.0", "2.0"], "c"],
   ["What is the output of: print(math.tan(0))?", ["0.0", "1.0", "Infinity", "NaN"], "a"],
@@ -84,26 +86,37 @@
         div.className = "question";
         const qNum = i + 1;
         div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
-          q[1].map((opt, j) => {
-            const optChar = String.fromCharCode(97 + j);
-            return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
-          }).join('') +
-          `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+  q[1].map((opt, j) => {
+    const optChar = String.fromCharCode(97 + j);
+    return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
+  }).join('') +
+  `<label><input type="radio" name="q${qNum}" value="null"> <i>Null / Skip this question</i></label><br>` +
+  `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+
         form.appendChild(div);
+        
       });
     };
 
     function checkAnswers() {
       let score = 0;
+      let counted = 0;
       questions.forEach((q, i) => {
         const qNum = i + 1;
         const correct = q[2];
         const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
         const feedback = document.getElementById(`feedback${qNum}`);
         feedback.style.display = 'block';
+
         if (userAnswer) {
+          if (userAnswer.value === "null") {
+            feedback.textContent = "Question was skipped and not counted.";
+            feedback.className = "answer-feedback";
+            return; // skip counting
+          }
+          counted++; // only count if not null
           if (userAnswer.value === correct) {
-            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;">Correct!';
+            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:66px;height:66px;vertical-align:middle;margin-right:6px;">Correct!';
             feedback.className = "answer-feedback correct";
             score++;
           } else {
@@ -115,9 +128,11 @@
           const correctAnswer = q[1][correct.charCodeAt(0) - 97];
           feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
           feedback.className = "answer-feedback incorrect";
+          counted++; // still count unanswered questions
         }
       });
-      document.getElementById('result').textContent = `You got ${score} out of ${questions.length} correct.`;
+
+      document.getElementById('result').textContent = `You got ${score} out of ${counted} counted questions correct.`;
     }
   </script>
 </body>

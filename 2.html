@@ -18,15 +18,16 @@
 </head>
 <body>
     <!-- Add navigation buttons -->
-    <div style="margin-top: 20px;">
-        <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
-        <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
-        <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
-        <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
-        <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
-    </div>
+<div style="margin-top: 20px;">
+  <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+  <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
+  <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+  <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+  <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+  <button type="button" onclick="location.href='6.html'">Go to Page 6 (Thomas Doc)</button>
+</div>
     
-  <h1>Sultan's Devious Course  Review Quiz- 2 (47 Questions)</h1>
+  <h1>Sultan's Devious Course  Review Quiz- 2 (79 Questions)</h1>
   <form id="quizForm"></form>
   <div class="result" id="result"></div>
 <!-- ...existing code... -->
@@ -35,7 +36,7 @@
 <!-- Add navigation buttons -->
 <div style="margin-top: 20px;">
     <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
-    <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+    <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
     <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
     <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
     <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
@@ -45,55 +46,87 @@
 
 
   <script>
-      const questions = [
-      ["What method opens a file for reading in Python?", ["file.read()", "open('file')", "open('file', 'r')", "read('file')"], "c"],
-  ["What keyword is used to handle exceptions?", ["try", "handle", "except", "catch"], "c"],
-  ["What does the 'finally' block do in exception handling?", ["Executes only on error", "Always executes", "Executes if no error", "Skips execution"], "b"],
-  ["Which of these is used for matching patterns?", ["pyinputplus", "regex", "re", "string"], "c"],
-  ["Which method checks if a string starts with a specified value?", ["starts()", "startswith()", "begin()", "checkstart()"], "b"],
-  ["How do you append to a file in Python?", ["'r+'", "'a'", "'w'", "'x'"], "b"],
-  ["What does re.findall() return?", ["First match", "Boolean", "List of matches", "Number of matches"], "c"],
-  ["Which keyword is used to define a class in Python?", ["object", "define", "class", "type"], "c"],
-  ["Which of these is a magic method in Python?", ["__init__", "construct", "new__", "__class__"], "a"],
-  ["What is 'self' in a class method?", ["A variable", "Reference to instance", "Parent object", "None"], "b"],
-  ["What does the 'with' keyword do in file handling?", ["Opens permanently", "Closes file manually", "Manages context", "Ignores errors"], "c"],
-  ["What is the output of 'Hello'.upper()?", ["hello", "HELLO", "Hello", "error"], "b"],
-  ["How do you catch multiple exceptions?", ["Multiple try blocks", "Multiple catch blocks", "except (A, B):", "try (A, B):"], "c"],
-  ["What is __str__ used for in a class?", ["Returns object memory", "Returns a readable string", "Initializes object", "Nothing"], "b"],
-  ["What does re.match() do?", ["Matches pattern anywhere", "Only at start", "Matches all", "None"], "b"],
-  ["What file mode creates a new file?", ["'w'", "'a'", "'x'", "'r'"], "c"],
-  ["What exception is raised by int('abc')?", ["ValueError", "NameError", "TypeError", "IndexError"], "a"],
-  ["Which of these is a method of list comprehension?", ["filter", "for-in if", "lambda", "map"], "b"],
-  ["Which method reads one line at a time from a file?", ["readline()", "read()", "readall()", "readlines()"], "a"],
-  ["What method is used to test a substring in a string?", ["test()", "in", "check()", "find()"], "b"],
-  ["Which keyword is used to create a generator in Python?", ["gen", "return", "yield", "produce"], "c"],
-  ["Which string method removes whitespace from both ends?", ["remove()", "strip()", "trim()", "erase()"], "b"],
-  ["Which method removes an item from a list by value?", ["pop()", "delete()", "remove()", "clear()"], "c"],
-  ["Which method returns the position of a substring?", ["locate()", "position()", "find()", "indexof()"], "c"],
-  ["Which module helps write tests in Python?", ["testlib", "doctest", "validator", "pyunit"], "b"],
-  ["Which is used to check for a specific exception type?", ["if error", "except TypeError", "try TypeError", "handle"], "b"],
-  ["How to declare a class with a parent?", ["class Child: Parent", "class Child(Parent):", "Child inherits Parent", "new Child(Parent)"], "b"],
-  ["Which method adds a new attribute to an object?", ["insert", "setattr", "addattr", "property"], "b"],
-  ["What’s the result of 'Python'[0]?", ["P", "y", "n", "o"], "a"],
-  ["What does isinstance(obj, Class) return?", ["True if match", "False always", "Error", "None"], "a"],
-  ["Which function writes to a file?", ["put()", "print()", "write()", "echo()"], "c"],
-  ["What is '__name__' used for?", ["Module detection", "File path", "Function name", "Class name"], "a"],
-  ["Which of these is not a built-in exception?", ["SyntaxError", "BreakError", "TypeError", "ValueError"], "b"],
-  ["Which method creates a list from a string split by spaces?", ["split()", "explode()", "divide()", "chop()"], "a"],
-  ["Which method combines strings in a list?", ["merge()", "concat()", "join()", "combine()"], "c"],
-  ["How do you check if file exists?", ["os.check()", "os.filecheck()", "os.path.exists()", "file.exists()"], "c"],
-  ["Which of these creates a dictionary comprehension?", ["dict[...]", "{k:v for ...}", "new dict()", "list2dict"], "b"],
-  ["Which of the following types is mutable?", ["str", "tuple", "list", "int"], "c"],
-  ["What is the purpose of __repr__ in a class?", ["For print()", "Developer representation", "Initializer", "Destructor"], "b"],
-  ["What does 'raise' keyword do?", ["Handle error", "Ignore error", "Throw exception", "Stop script"], "c"],
-  ["Which function returns all built-in exceptions?", ["exceptions()", "dir(__builtins__)", "get_errors()", "sys.errors()"], "b"],
-  ["Which built-in module handles command-line arguments?", ["argparse", "sys", "cli", "console"], "a"],
-  ["What does 'pass' do in a block?", ["Breaks", "Raises error", "Does nothing", "Exits"], "c"],
-  ["Which format is used to save structured data in Python?", ["TXT", "YAML", "CSV", "JSON"], "d"],
-  ["What does '__del__' method do?", ["Create object", "Print object", "Delete object", "Nothing"], "c"],
-  ["How do you define a multi-line string?", ["quotes", "''' or \"\"\"", "str()", "multistr()"], "b"],
-  ["Which of these is a built-in testing module?", ["unitest", "unittest", "pytest", "testpy"], "b"]
-      ];
+const questions = [
+  ["What does os.getcwd() return?", ["Current file name", "Current working directory", "Current script name", "Current OS version"], "b"],
+  ["Which function is used to list all files and directories in a given path?", ["os.listdir()", "os.files()", "os.scan()", "os.getfiles()"], "a"],
+  ["Which command creates a new directory?", ["os.mkdir()", "os.makedir()", "os.createdir()", "os.dir()"], "a"],
+  ["Which function is used to rename a directory or file?", ["os.name()", "os.renamedir()", "os.rename()", "os.move()"], "c"],
+  ["What does os.rmdir() do?", ["Removes a file", "Deletes directory contents", "Removes a directory", "Recursively removes folders"], "c"],
+  ["What type of object does os.listdir() return?", ["Tuple", "List", "Set", "Dictionary"], "b"],
+  ["Which function pauses execution for a set amount of seconds?", ["time.wait()", "time.snooze()", "time.delay()", "time.sleep()"], "d"],
+  ["What module must be imported to access file system paths and OS functions?", ["sys", "os", "pathlib", "dir"], "b"],
+  ["What does os.name return on Windows?", ["'nt'", "'posix'", "'win'", "'windows'"], "a"],
+  ["What does os.path.getsize() return?", ["Number of files", "File creation date", "File size in bytes", "File type"], "c"],
+  ["Which method checks if a path exists?", ["os.exist()", "os.path.exists()", "os.path.check()", "os.valid()"], "b"],
+  ["Which function returns True if the path is a file?", ["os.path.isfile()", "os.path.isdir()", "os.checkfile()", "os.filecheck()"], "a"],
+  ["Which function checks if a path is a folder?", ["os.isdir()", "os.dircheck()", "os.path.isdir()", "os.path.folder()"], "c"],
+  ["Which path is absolute?", ["main.py", "./main.py", "../main.py", "C:\\Users\\main.py"], "d"],
+  ["What is the default file mode when opening a file?", ["'r'", "'w'", "'a'", "'x'"], "a"],
+  ["Which mode is used to create and write to a new file?", ["'a'", "'w'", "'x'", "'rw'"], "c"],
+  ["What does 'a' mode do when opening a file?", ["Deletes content", "Reads content", "Appends to content", "Closes file"], "c"],
+  ["Which function reads all lines into a list?", ["read()", "readline()", "readlines()", "file.readlines()"], "c"],
+  ["What function reads the entire file content at once?", ["read()", "readline()", "readlines()", "get()"], "a"],
+  ["Which function reads the file line by line?", ["readlines()", "read()", "readline()", "file.readlines()"], "c"],
+  ["What does file.close() do?", ["Ends Python script", "Closes terminal", "Frees file resources", "Deletes file"], "c"],
+  ["Which keyword writes content to a file?", ["write()", "record()", "log()", "push()"], "a"],
+  ["Which method should be used to append content without overwriting?", ["write()", "append()", "mode='a'", "file.append()"], "c"],
+  ["What happens if you open a file in write mode that already exists?", ["Nothing", "Appends content", "Deletes and overwrites", "Raises error"], "c"],
+  ["Which statement will raise a ValueError?", ["Reading an open file", "Writing to a closed file", "Appending to a file", "Opening an existing file"], "b"],
+  ["What function deletes a file?", ["os.rmdir()", "os.remfile()", "os.unlink()", "os.remove()"], "d"],
+  ["What function returns the system’s name?", ["os.name()", "os.sysname()", "os.name", "os.sys.name"], "c"],
+  ["Which function gets file names and directories in current directory?", ["os.cwd()", "os.walk()", "os.listdir()", "os.contents()"], "c"],
+  ["Which of these methods helps check if a file exists before deleting it?", ["os.is_file()", "os.path.exists()", "os.exists()", "os.filecheck()"], "b"],
+  ["How do you safely rename a file only if it exists?", ["os.rename()", "if os.path.exists(): os.rename()", "os.rename_safe()", "rename()"], "b"],
+  ["Which function can navigate directory trees recursively?", ["os.walk()", "os.tree()", "os.deepdir()", "os.path.all()"], "a"],
+  ["What object type is returned by os.walk()?", ["string", "list", "tuple", "3-tuple of dirpath, dirnames, filenames"], "d"],
+  ["Which is used to open and run a file with its default app in Windows?", ["os.open()", "os.exec()", "os.startfile()", "os.launch()"], "c"],
+  ["What does os.path.join() do?", ["Splits a path", "Concatenates paths correctly", "Checks path validity", "Gets file size"], "b"],
+  ["Which file method reads each character in the file?", ["read()", "readline()", "readchar()", "read(1)"], "d"],
+  ["What happens if you try to read a file after it's closed?", ["Reads empty string", "Raises ValueError", "Reopens it", "Nothing"], "b"],
+  ["Which method checks if a directory exists and is accessible?", ["os.is_accessible()", "os.isopen()", "os.access()", "os.path.isdir()"], "d"],
+  ["What does 'with open(...) as file:' ensure?", ["Code readability", "Automatic file closing", "File creation", "None of these"], "b"],
+  ["Which escape character adds a new line when writing to files?", ["\\b", "\\n", "\\r", "\\f"], "b"],
+  ["Which method lets you replace content line-by-line?", ["map()", "replace()", "readlines()+replace()", "os.rewrite()"], "c"],
+  ["How can you update only part of a text file?", ["Read, modify, write", "Use edit()", "Use update()", "write() only"], "a"],
+  ["What does os.remove('file.txt') do?", ["Archives file", "Closes file", "Deletes file", "Renames file"], "c"],
+  ["What does file.seek(0) do?", ["Closes file", "Moves to start", "Skips line", "Deletes content"], "b"],
+  ["Which mode will raise an error if file already exists?", ["'r'", "'w'", "'x'", "'a'"], "c"],
+  ["What does file.truncate(size) do?", ["Expands file", "Deletes file", "Cuts file to size", "Reads size bytes"], "c"],
+  ["What’s the output of file.read(5) if the file starts with 'Hello World'?", ["Hello", "World", "Hello W", "H"], "a"],
+  ["What’s the benefit of using 'with open() as f'?", ["Avoids indentation", "No need to close manually", "Improves speed", "Increases RAM"], "b"],
+  ["What does the r+ file mode mean?", ["Read only", "Write only", "Read and write", "Replace file"], "c"],
+  ["What happens when file is opened in 'w+' mode?", ["Raises error", "Opens file only", "Creates file if not exists", "Deletes file if exists"], "d"],
+  ["Which module provides time-related functions in Python?", ["datetime", "timelib", "time", "calendar"], "c"],
+  ["What does time.sleep(5) do?", ["Stops code for 5 minutes", "Delays execution for 5 seconds", "Skips 5 lines", "Pauses output only"], "b"],
+  ["What is the return type of time.time()?", ["int", "float", "str", "datetime"], "b"],
+  ["What does time.time() return?", ["Current date", "Time since midnight", "Seconds since epoch", "Time in HH:MM:SS"], "c"],
+  ["The 'epoch' in Unix time starts at:", ["1970-01-01", "1900-01-01", "2000-01-01", "1980-01-01"], "a"],
+  ["Which function returns a readable time string?", ["time.read()", "time.print()", "time.ctime()", "time.format()"], "c"],
+  ["What does time.localtime() return?", ["Current timezone", "Datetime object", "Tuple with local time", "String of local time"], "c"],
+  ["Which function converts a time tuple into a string?", ["time.print()", "time.tostring()", "time.ctime()", "time.asctime()"], "d"],
+  ["Which function creates a formatted time string?", ["time.strftime()", "time.format()", "time.timify()", "time.tostr()"], "a"],
+  ["What is '%Y' in strftime?", ["Year with century", "Year without century", "Day of year", "Minute"], "a"],
+  ["What is '%H' in time.strftime()?", ["Hours (12-hour)", "Hours (24-hour)", "Minutes", "Milliseconds"], "b"],
+  ["What does '%S' represent in strftime?", ["Seconds", "String", "Start of time", "Sunday"], "a"],
+  ["How can you get the current minute using time.strftime()?", ["%s", "%m", "%M", "%i"], "c"],
+  ["Which directive gives abbreviated weekday name?", ["%W", "%w", "%A", "%a"], "d"],
+  ["Which format code returns the full weekday name?", ["%a", "%A", "%d", "%W"], "b"],
+  ["What is returned by time.gmtime()?", ["Local time", "UTC time tuple", "String time", "Datetime object"], "b"],
+  ["Which time function converts seconds to a struct_time in local time?", ["time.gmtime()", "time.mktime()", "time.localtime()", "time.format()"], "c"],
+  ["Which function gives current system time in formatted string?", ["time.current()", "time.show()", "time.ctime()", "time.get()"], "c"],
+  ["Which struct_time attribute gives the day of the week?", ["tm_wday", "tm_dow", "tm_day", "tm_dayofweek"], "a"],
+  ["What does time.mktime() require as input?", ["Integer timestamp", "Tuple (struct_time)", "String", "Datetime object"], "b"],
+  ["Which function is useful for performance measurement?", ["time.track()", "time.timer()", "time.time()", "time.measure()"], "c"],
+  ["What is the range of tm_mon in struct_time?", ["1-12", "0-11", "0-12", "1-31"], "a"],
+  ["Which of these returns a `struct_time` object?", ["time.sleep()", "time.time()", "time.gmtime()", "time.now()"], "c"],
+  ["What is the use of time.tzname?", ["Gives timezone name", "Gives local date", "Gives seconds", "Returns DST info"], "a"],
+  ["How can you get AM/PM in strftime?", ["%H", "%M", "%p", "%a"], "c"],
+  ["Which of the following pauses the script for exactly 2 seconds?", ["time.delay(2)", "time.wait(2)", "time.sleep(2)", "time.pause(2)"], "c"],
+  ["What does time.perf_counter() do?", ["Counts system time", "Returns high-res timer", "Gives timezone", "Resets counter"], "b"],
+  ["What is the result type of time.localtime()?", ["tuple", "list", "str", "object"], "a"],
+  ["Which directive gives month name abbreviation?", ["%m", "%M", "%b", "%B"], "c"],
+  ["What’s the correct format for “April 10, 2025 15:34:10”?", ["%B %d, %Y %H:%M:%S", "%b %d, %y %I:%M:%S", "%d/%m/%Y %H:%M:%S", "%B-%d-%Y"], "a"]
+];
       window.onload = function () {
       const form = document.getElementById("quizForm");
       questions.forEach((q, i) => {
@@ -101,26 +134,37 @@
         div.className = "question";
         const qNum = i + 1;
         div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
-          q[1].map((opt, j) => {
-            const optChar = String.fromCharCode(97 + j);
-            return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
-          }).join('') +
-          `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+  q[1].map((opt, j) => {
+    const optChar = String.fromCharCode(97 + j);
+    return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
+  }).join('') +
+  `<label><input type="radio" name="q${qNum}" value="null"> <i>Null / Skip this question</i></label><br>` +
+  `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+
         form.appendChild(div);
+        
       });
     };
 
     function checkAnswers() {
       let score = 0;
+      let counted = 0;
       questions.forEach((q, i) => {
         const qNum = i + 1;
         const correct = q[2];
         const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
         const feedback = document.getElementById(`feedback${qNum}`);
         feedback.style.display = 'block';
+
         if (userAnswer) {
+          if (userAnswer.value === "null") {
+            feedback.textContent = "Question was skipped and not counted.";
+            feedback.className = "answer-feedback";
+            return; // skip counting
+          }
+          counted++; // only count if not null
           if (userAnswer.value === correct) {
-            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;">Correct!';
+            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:66px;height:66px;vertical-align:middle;margin-right:6px;">Correct!';
             feedback.className = "answer-feedback correct";
             score++;
           } else {
@@ -132,9 +176,11 @@
           const correctAnswer = q[1][correct.charCodeAt(0) - 97];
           feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
           feedback.className = "answer-feedback incorrect";
+          counted++; // still count unanswered questions
         }
       });
-      document.getElementById('result').textContent = `You got ${score} out of ${questions.length} correct.`;
+
+      document.getElementById('result').textContent = `You got ${score} out of ${counted} counted questions correct.`;
     }
   </script>
 </body>

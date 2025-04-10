@@ -18,15 +18,16 @@
 </head>
 <body>
     <!-- Add navigation buttons -->
-    <div style="margin-top: 20px;">
-        <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
-        <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
-        <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
-        <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
-        <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
-    </div>
+<div style="margin-top: 20px;">
+  <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
+  <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
+  <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
+  <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
+  <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
+  <button type="button" onclick="location.href='6.html'">Go to Page 6 (Thomas Doc)</button>
+</div>
 
-  <h1>Sultan's Devious Course  Review Quiz- 1 (49 Questions)</h1>
+  <h1>Sultan's Devious Course  Review Quiz- 1 (48 Questions)</h1>
   <form id="quizForm"></form>
   <div class="result" id="result"></div>
 <!-- ...existing code... -->
@@ -35,7 +36,7 @@
 <!-- Add navigation buttons -->
 <div style="margin-top: 20px;">
     <button type="button" onclick="location.href='index.html'">Go to Page 1 (MC)</button>
-    <button type="button" onclick="location.href='2.html'">Go to Page 2 (MC)</button>
+    <button type="button" onclick="location.href='2.html'">Go to Page 2 (Time & OS)</button>
     <button type="button" onclick="location.href='3.html'">Go to Page 3 (MC)</button>
     <button type="button" onclick="location.href='4.html'">Go to Page 4 (Guess Output)</button>
     <button type="button" onclick="location.href='5.html'">Go to Page 5 (Math)</button>
@@ -71,9 +72,7 @@
         ["How do you check equality in Python?", ["=", "equals", "==", "!="], "c"],
         ["Which is a valid Python identifier?", ["2cool", "first-name", "first_name", "my var"], "c"],
         ["How do you create a new directory with os module?", ["os.newdir()", "os.mkdir()", "os.createdir()", "os.dir()"], "b"],
-        ["Which keyword handles exceptions?", ["try", "check", "throw", "handle"], "a"],
         ["What is the extension for Python files?", [".java", ".py", ".ipynb", ".exe"], "b"],
-        ["Which function returns a string input?", ["inputStr()", "getStr()", "prompt()", "scan()"], "a"],
         ["Which symbol separates dictionary keys and values?", ["-", "=", ":", "=>"], "c"],
         ["Which structure is immutable?", ["list", "tuple", "dict", "set"], "b"],
         ["How do you handle multiple conditions?", ["thou-shall", "switch", "if-elif-else", "for-if"], "c"],
@@ -103,26 +102,37 @@
         div.className = "question";
         const qNum = i + 1;
         div.innerHTML = `<h3>${qNum}. ${q[0]}</h3>` +
-          q[1].map((opt, j) => {
-            const optChar = String.fromCharCode(97 + j);
-            return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
-          }).join('') +
-          `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+  q[1].map((opt, j) => {
+    const optChar = String.fromCharCode(97 + j);
+    return `<label><input type="radio" name="q${qNum}" value="${optChar}"> ${opt}</label><br>`;
+  }).join('') +
+  `<label><input type="radio" name="q${qNum}" value="null"> <i>Null / Skip this question</i></label><br>` +
+  `<div class="answer-feedback" id="feedback${qNum}"></div>`;
+
         form.appendChild(div);
+        
       });
     };
 
     function checkAnswers() {
       let score = 0;
+      let counted = 0;
       questions.forEach((q, i) => {
         const qNum = i + 1;
         const correct = q[2];
         const userAnswer = document.querySelector(`input[name="q${qNum}"]:checked`);
         const feedback = document.getElementById(`feedback${qNum}`);
         feedback.style.display = 'block';
+
         if (userAnswer) {
+          if (userAnswer.value === "null") {
+            feedback.textContent = "Question was skipped and not counted.";
+            feedback.className = "answer-feedback";
+            return; // skip counting
+          }
+          counted++; // only count if not null
           if (userAnswer.value === correct) {
-            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;">Correct!';
+            feedback.innerHTML = '<img src="1329878082605158491.webp" alt="check" style="width:66px;height:66px;vertical-align:middle;margin-right:6px;">Correct!';
             feedback.className = "answer-feedback correct";
             score++;
           } else {
@@ -134,9 +144,11 @@
           const correctAnswer = q[1][correct.charCodeAt(0) - 97];
           feedback.textContent = `No answer selected. Correct answer: ${correctAnswer}`;
           feedback.className = "answer-feedback incorrect";
+          counted++; // still count unanswered questions
         }
       });
-      document.getElementById('result').textContent = `You got ${score} out of ${questions.length} correct.`;
+
+      document.getElementById('result').textContent = `You got ${score} out of ${counted} counted questions correct.`;
     }
   </script>
 </body>
